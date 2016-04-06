@@ -3,19 +3,61 @@
 import boat_pb2
 import serial
 import sys
+import time
+def validateReceivedPacket(potentialPacket):
+    bytesIn = bytearray()
+    bytesIn.extend(potentialPacket)
 
-# Iterates though all telemetry messages and prints a subset of location.
+    length = bytesIn[2]
+    data_start = 14
+    data = bytesIn[data_start:-1]
+    calced_check = 0xff - (int(sum(bytesIn[2:-1])) & 0xff)
+    checksum = bytesIn[-1]
+    if calced_check != checksum:
+        print "Invalid checksum (0x{:02x}), expected 0x{:02x}".format(checksum, calced_check)
+        return None
+
+    frameType = hex(bytesIn[2])
+
+    # print "Length: {:d}".format(length)
+    # print "Data Start: {:d}".format(data_start)
+    # print " ".join(["{:02x}".format(x) for x in data])
+
+    return data
+
+#  Try outputting the message.
 def ListTelemetry(telemetry):
+    print "Boat Status:", telemetry.status
     if telemetry.HasField('location'):
-            print "latitude:", telemetry.location.latitude
-            print "longitude:", telemetry.location.longitude
-
-# Main procedure:  Reads the entire address book from a file and prints all
-#   the information inside.
-telemetry = boat_pb2.Telemetry()
-
+            if telemetry.location.HasField('latitude'):
+                print "Latitude:", telemetry.location.latitude
+            if telemetry.location.HasField('longitude'):
+                print "Longitude:", telemetry.location.longitude
+            if telemetry.location.HasField('number_of_satellites_visible'):
+                print "Satellites Visible:", telemetry.location.number_of_satellites_visible
+            if telemetry.location.HasField('speed_over_ground'):
+                print "Speed Over Ground:", telemetry.location.speed_over_ground
+            if telemetry.location.HasField('true_heading'):
+                print "True Heading:", telemetry.location.true_heading
+            if telemetry.location.HasField('true_bearing'):
+                print "True Bearing:", telemetry.location.true_bearing
+            if telemetry.location.HasField('utc_seconds'):
+                print "UTC Seconds:", telemetry.location.utc_seconds
+            for x in range(0, 2):
+                print "Motor Number", telemetry.motor[x].motor_number
+                if telemetry.motor[x].HasField('is_alive'):
+                    print "Motor %d Is Alive?: %s" % (x, telemetry.motor[x].is_alive,)
+                if telemetry.motor[x].HasField('rpm'):
+                    print "Motor %d Rpm: %s" % (x, telemetry.motor[x].rpm,)
+                if telemetry.motor[x].HasField('temperature'):
+                    print "Motor %d Temperature: %s" % (x, telemetry.motor[x].temperature,)
+                if telemetry.motor[x].HasField('voltage'):
+                    print "Motor %d Voltage: %s" % (x, telemetry.motor[x].voltage,)
+                if telemetry.motor[x].HasField('voltage'):
+                    print "Motor %d Current: %s" % (x, telemetry.motor[x].current,)
+                print ""
 try:
-    with serial.Serial('/dev/tty.usbserial-A6009s3y', 115200) as ser:
+    with serial.Serial('/dev/tty.usbserial-A6009s3y', 9600) as ser:
         rxBuffer = bytearray()
         while True:
             tdata = rxBuffer;
@@ -29,46 +71,14 @@ try:
             # Splits the potential multiple packets recieved
             packets = tdata[1:].split(bytes(b'\x7E'))
 
-            #print "Packets found:",len(packets)
-
             rxBuffer = bytearray() # Clear the rxBuffer and prepare for any malformed packets
 
             for potentialPacket in packets:
                 payload = validateReceivedPacket(potentialPacket)
-                if (payload is not NONE):
-                    telemetry.ParseFromString(payload)
+                if (payload is not None):
+                    telemetry = boat_pb2.Telemetry()
+                    telemetry.ParseFromString(str(payload))
                     ListTelemetry(telemetry)
-        #print "\r\n"
+#print "\r\n"
 except KeyboardInterrupt:
     print "Exiting read thread..."
-
-
-def validateReceivedPacket(potentialPacket):
-    bytesIn = bytearray()
-    bytesIn.extend(potentialPacket)
-
-    # Checks whether the frame is of the minimum size needed
-    # 9 bytes is the minimum length of a rx frame without a payload
-    # This removes the need to check against escaped characters also
-    if (len(bytesIn) - bytesIn.count(bytes(b'0x07D')) < 9):
-        return None
-
-    length = bytesIn[1]
-
-    # Does the packet match the length it claims?
-    # Especially useful to detect when we've only got 'half' a packet
-    if length > (len(bytesIn[2:])-1):
-        return None
-
-    checksum = hex(bytesIn[len(bytesIn)-1])
-    frameType = hex(bytesIn[2])
-
-    # Checksum check
-    if (sum(bytesIn[2:3+length]) & 0xFF) != 0xFF:
-    	return None
-
-
-    payload = bytearray()
-    payload.extend(packet[15:len(packet)-2])
-
-    return payload
