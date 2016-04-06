@@ -15,7 +15,7 @@ def ListTelemetry(telemetry):
 telemetry = boat_pb2.Telemetry()
 
 try:
-    with serial.Serial('/dev/tty.usbmodem1422', 115200) as ser:
+    with serial.Serial('/dev/tty.usbserial-A6009s3y', 115200) as ser:
         rxBuffer = bytearray()
         while True:
             tdata = rxBuffer;
@@ -35,9 +35,9 @@ try:
 
             for potentialPacket in packets:
                 payload = validateReceivedPacket(potentialPacket)
-                    if (payload is not NONE):
-                        telemetry.ParseFromString(payload)
-                        ListTelemetry(telemetry)
+                if (payload is not NONE):
+                    telemetry.ParseFromString(payload)
+                    ListTelemetry(telemetry)
         #print "\r\n"
 except KeyboardInterrupt:
     print "Exiting read thread..."
