@@ -43,28 +43,28 @@ def ListTelemetry(telemetry):
                 print "True Bearing:", telemetry.location.true_bearing
             if telemetry.location.HasField('utc_seconds'):
                 print "UTC Seconds:", telemetry.location.utc_seconds
-            for x in range(0, 2):
-                print "Motor Number", telemetry.motor[x].motor_number
-                if telemetry.motor[x].HasField('is_alive'):
-                    print "Motor %d Is Alive?: %s" % (x, telemetry.motor[x].is_alive,)
-                if telemetry.motor[x].HasField('rpm'):
-                    print "Motor %d Rpm: %s" % (x, telemetry.motor[x].rpm,)
-                if telemetry.motor[x].HasField('temperature'):
-                    print "Motor %d Temperature: %s" % (x, telemetry.motor[x].temperature,)
-                if telemetry.motor[x].HasField('voltage'):
-                    print "Motor %d Voltage: %s" % (x, telemetry.motor[x].voltage,)
-                if telemetry.motor[x].HasField('voltage'):
-                    print "Motor %d Current: %s" % (x, telemetry.motor[x].current,)
-            if telemetry.HasField('debug'):
-                if telemetry.debug.HasField('bearing_compensation'):
-                    print "Bearing Compensation:", telemetry.debug.bearing_compensation
-                if telemetry.debug.HasField('speed_over_ground_compensation'):
-                    print "Speed Compensation:", telemetry.debug.speed_over_ground_compensation
-                if telemetry.debug.HasField('tmotor_1_throttle_compensation'):
-                    print "Motor 1 Throttle Compensation:", telemetry.debug.motor_1_throttle_compensation
-                if telemetry.debug.HasField('motor_2_throttle_compensation'):
-                    print "Motor 2 Throttle Compensation:", telemetry.debug.motor_2_throttle_compensation
-            print ""
+    for motor in telemetry.motor:
+        print "Motor Number", motor.motor_number
+        if motor.HasField('is_alive'):
+            print "Motor %d Is Alive?: %s" % (motor.motor_number, motor.is_alive,)
+        if motor.HasField('rpm'):
+            print "Motor %d Rpm: %s" % (motor.motor_number, motor.rpm,)
+        if motor.HasField('temperature'):
+            print "Motor %d Temperature: %s" % (motor.motor_number, motor.temperature,)
+        if motor.HasField('voltage'):
+            print "Motor %d Voltage: %s" % (motor.motor_number, motor.voltage,)
+        if motor.HasField('voltage'):
+            print "Motor %d Current: %s" % (motor.motor_number, motor.current,)
+    if telemetry.HasField('debug'):
+            if telemetry.debug.HasField('bearing_compensation'):
+                print "Bearing Compensation:", telemetry.debug.bearing_compensation
+            if telemetry.debug.HasField('speed_over_ground_compensation'):
+                print "Speed Compensation:", telemetry.debug.speed_over_ground_compensation
+            if telemetry.debug.HasField('motor_1_throttle_compensation'):
+                print "Motor 1 Throttle Compensation:", telemetry.debug.motor_1_throttle_compensation
+            if telemetry.debug.HasField('motor_2_throttle_compensation'):
+                print "Motor 2 Throttle Compensation:", telemetry.debug.motor_2_throttle_compensation
+    print ""
 try:
     with serial.Serial('/dev/tty.usbserial-A6009s3y', 9600) as ser:
         rxBuffer = bytearray()
