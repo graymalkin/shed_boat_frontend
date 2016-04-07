@@ -55,7 +55,16 @@ def ListTelemetry(telemetry):
                     print "Motor %d Voltage: %s" % (x, telemetry.motor[x].voltage,)
                 if telemetry.motor[x].HasField('voltage'):
                     print "Motor %d Current: %s" % (x, telemetry.motor[x].current,)
-                print ""
+            if telemetry.HasField('debug'):
+                if telemetry.debug.HasField('bearing_compensation'):
+                    print "Bearing Compensation:", telemetry.debug.bearing_compensation
+                if telemetry.debug.HasField('speed_over_ground_compensation'):
+                    print "Speed Compensation:", telemetry.debug.speed_over_ground_compensation
+                if telemetry.debug.HasField('tmotor_1_throttle_compensation'):
+                    print "Motor 1 Throttle Compensation:", telemetry.debug.motor_1_throttle_compensation
+                if telemetry.debug.HasField('motor_2_throttle_compensation'):
+                    print "Motor 2 Throttle Compensation:", telemetry.debug.motor_2_throttle_compensation
+            print ""
 try:
     with serial.Serial('/dev/tty.usbserial-A6009s3y', 9600) as ser:
         rxBuffer = bytearray()
