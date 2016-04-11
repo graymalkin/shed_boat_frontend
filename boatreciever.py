@@ -38,9 +38,9 @@ def ListTelemetry(telemetry):
             if telemetry.location.HasField('speed_over_ground'):
                 print "Speed Over Ground:", telemetry.location.speed_over_ground
             if telemetry.location.HasField('true_heading'):
-                print "True Heading:", telemetry.location.true_heading / 1000
+                print "True Heading:", float(telemetry.location.true_heading / 1000)
             if telemetry.location.HasField('true_bearing'):
-                print "True Bearing:", telemetry.location.true_bearing / 1000
+                print "True Bearing:", float(telemetry.location.true_bearing / 1000)
             if telemetry.location.HasField('utc_seconds'):
                 print "UTC Seconds:", telemetry.location.utc_seconds
     for motor in telemetry.motor:
@@ -57,13 +57,13 @@ def ListTelemetry(telemetry):
             print "Motor %d Current: %s" % (motor.motor_number, motor.current,)
     if telemetry.HasField('debug'):
             if telemetry.debug.HasField('bearing_compensation'):
-                print "Bearing Compensation:", telemetry.debug.bearing_compensation
+                print "Bearing Compensation:", float(telemetry.debug.bearing_compensation)
             if telemetry.debug.HasField('speed_over_ground_compensation'):
-                print "Speed Compensation:", telemetry.debug.speed_over_ground_compensation
+                print "Speed Compensation:", float(telemetry.debug.speed_over_ground_compensation)
             if telemetry.debug.HasField('motor_1_throttle_compensation'):
-                print "Motor 1 Throttle Compensation:", telemetry.debug.motor_1_throttle_compensation / 1000
+                print "Motor 1 Throttle Compensation:", float(telemetry.debug.motor_1_throttle_compensation / 1000)
             if telemetry.debug.HasField('motor_2_throttle_compensation'):
-                print "Motor 2 Throttle Compensation:", telemetry.debug.motor_2_throttle_compensation / 1000
+                print "Motor 2 Throttle Compensation:", float(telemetry.debug.motor_2_throttle_compensation / 1000)
     print ""
 try:
     with serial.Serial('/dev/tty.usbserial-A6009s3y', 9600) as ser:
