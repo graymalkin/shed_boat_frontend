@@ -25,9 +25,14 @@ def validateReceivedPacket(potentialPacket):
 
     return data
 
+def status_to_string(status):
+	return ["UNDEFINED", "UNDERWAY_MANUAL", "UNDERWAY_AUTOPILOT", "STATIONARY", "RESTRICTED_MANEUVERABILITY"][status]
+def quality_to_string(quality):
+	return ["IDEAL", "EXCELLENT", "GOOD", "MODERATE", "FAIR", "SHIT"][quality]
+
 #  Try outputting the message.
 def ListTelemetry(telemetry):
-    print "Boat Status:", telemetry.status
+    print "Boat Status:", status_to_string(telemetry.status)
     if telemetry.HasField('location'):
             if telemetry.location.HasField('latitude'):
                 print "Latitude:", telemetry.location.latitude
@@ -43,6 +48,8 @@ def ListTelemetry(telemetry):
                 print "True Bearing:", float(telemetry.location.true_bearing / 1000)
             if telemetry.location.HasField('utc_seconds'):
                 print "UTC Seconds:", telemetry.location.utc_seconds
+            if telemetry.location.HasField('fix_quality'):
+				print "Fix Quality:", quality_to_string(telemetry.location.fix_quality)
     for motor in telemetry.motor:
         print "Motor Number", motor.motor_number
         if motor.HasField('is_alive'):
@@ -67,7 +74,7 @@ def ListTelemetry(telemetry):
     print ""
     sys.stdout.flush()
 try:
-    with serial.Serial('/dev/tty.usbserial-A6009s3y', 115200) as ser:
+    with serial.Serial('COM4', 115200) as ser:
         rxBuffer = bytearray()
         while True:
             tdata = rxBuffer;
