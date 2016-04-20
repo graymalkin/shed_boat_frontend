@@ -89,7 +89,6 @@ try:
                     telemetry = boat_pb2.Telemetry()
                     telemetry.ParseFromString(str(payload))
                     ListTelemetry(telemetry)
-
 #print "\r\n"
 except KeyboardInterrupt:
     print "Exiting read thread..."

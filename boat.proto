@@ -25,6 +25,7 @@ message Location{
   optional int32 true_heading = 5;
   optional int32 true_bearing = 6;
   optional int32 utc_seconds = 7;
+  optional float fix_quality = 8; 
 }
 
 message Motor {
