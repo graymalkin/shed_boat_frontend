@@ -18,7 +18,7 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='boat.proto',
   package='shedBoat',
-  serialized_pb=_b('\n\nboat.proto\x12\x08shedBoat\"\xc2\x02\n\tTelemetry\x12\x35\n\x06status\x18\x01 \x02(\x0e\x32\x1a.shedBoat.Telemetry.Status:\tUNDEFINED\x12$\n\x08location\x18\x02 \x01(\x0b\x32\x12.shedBoat.Location\x12\x1e\n\x05motor\x18\x03 \x03(\x0b\x32\x0f.shedBoat.Motor\x12\"\n\x07\x62\x61ttery\x18\x04 \x01(\x0b\x32\x11.shedBoat.Battery\x12\x1e\n\x05\x64\x65\x62ug\x18\x05 \x01(\x0b\x32\x0f.shedBoat.Debug\"t\n\x06Status\x12\r\n\tUNDEFINED\x10\x00\x12\x13\n\x0fUNDERWAY_MANUAL\x10\x01\x12\x16\n\x12UNDERWAY_AUTOPILOT\x10\x02\x12\x0e\n\nSTATIONARY\x10\x03\x12\x1e\n\x1aRESTRICTED_MANEUVERABILITY\x10\x04\"\xc6\x01\n\x08Location\x12\x10\n\x08latitude\x18\x01 \x01(\x02\x12\x11\n\tlongitude\x18\x02 \x01(\x02\x12$\n\x1cnumber_of_satellites_visible\x18\x03 \x01(\x05\x12\x19\n\x11speed_over_ground\x18\x04 \x01(\x05\x12\x14\n\x0ctrue_heading\x18\x05 \x01(\x05\x12\x14\n\x0ctrue_bearing\x18\x06 \x01(\x05\x12\x13\n\x0butc_seconds\x18\x07 \x01(\x05\x12\x13\n\x0b\x66ix_quality\x18\x08 \x01(\x02\"s\n\x05Motor\x12\x14\n\x0cmotor_number\x18\x01 \x02(\x05\x12\x10\n\x08is_alive\x18\x02 \x01(\x08\x12\x0b\n\x03rpm\x18\x03 \x01(\x05\x12\x13\n\x0btemperature\x18\x04 \x01(\x05\x12\x0f\n\x07voltage\x18\x05 \x01(\x05\x12\x0f\n\x07\x63urrent\x18\x06 \x01(\x05\"s\n\x07\x42\x61ttery\x12\x14\n\x0cpercent_full\x18\x01 \x01(\x05\x12$\n\x04\x63\x65ll\x18\x02 \x03(\x0b\x32\x16.shedBoat.Battery.Cell\x1a,\n\x04\x43\x65ll\x12\x13\n\x0b\x63\x65ll_number\x18\x01 \x02(\x05\x12\x0f\n\x07voltage\x18\x02 \x01(\x05\"\x9b\x01\n\x05\x44\x65\x62ug\x12\x1c\n\x14\x62\x65\x61ring_compensation\x18\x01 \x01(\x05\x12&\n\x1espeed_over_ground_compensation\x18\x02 \x01(\x05\x12%\n\x1dmotor_1_throttle_compensation\x18\x03 \x01(\x05\x12%\n\x1dmotor_2_throttle_compensation\x18\x04 \x01(\x05')
+  serialized_pb=_b('\n\nboat.proto\x12\x08shedBoat\"\xc2\x02\n\tTelemetry\x12\x35\n\x06status\x18\x01 \x02(\x0e\x32\x1a.shedBoat.Telemetry.Status:\tUNDEFINED\x12$\n\x08location\x18\x02 \x01(\x0b\x32\x12.shedBoat.Location\x12\x1e\n\x05motor\x18\x03 \x03(\x0b\x32\x0f.shedBoat.Motor\x12\"\n\x07\x62\x61ttery\x18\x04 \x01(\x0b\x32\x11.shedBoat.Battery\x12\x1e\n\x05\x64\x65\x62ug\x18\x05 \x01(\x0b\x32\x0f.shedBoat.Debug\"t\n\x06Status\x12\r\n\tUNDEFINED\x10\x00\x12\x13\n\x0fUNDERWAY_MANUAL\x10\x01\x12\x16\n\x12UNDERWAY_AUTOPILOT\x10\x02\x12\x0e\n\nSTATIONARY\x10\x03\x12\x1e\n\x1aRESTRICTED_MANEUVERABILITY\x10\x04\"\xb9\x02\n\x08Location\x12\x10\n\x08latitude\x18\x01 \x01(\x02\x12\x11\n\tlongitude\x18\x02 \x01(\x02\x12$\n\x1cnumber_of_satellites_visible\x18\x03 \x01(\x05\x12\x19\n\x11speed_over_ground\x18\x04 \x01(\x05\x12\x14\n\x0ctrue_heading\x18\x05 \x01(\x05\x12\x14\n\x0ctrue_bearing\x18\x06 \x01(\x05\x12\x13\n\x0butc_seconds\x18\x07 \x01(\x05\x12\x35\n\x0b\x66ix_quality\x18\x08 \x02(\x0e\x32\x1a.shedBoat.Location.Quality:\x04SHIT\"O\n\x07Quality\x12\t\n\x05IDEAL\x10\x00\x12\r\n\tEXCELLENT\x10\x01\x12\x08\n\x04GOOD\x10\x02\x12\x0c\n\x08MODERATE\x10\x03\x12\x08\n\x04\x46\x41IR\x10\x04\x12\x08\n\x04SHIT\x10\x05\"s\n\x05Motor\x12\x14\n\x0cmotor_number\x18\x01 \x02(\x05\x12\x10\n\x08is_alive\x18\x02 \x01(\x08\x12\x0b\n\x03rpm\x18\x03 \x01(\x05\x12\x13\n\x0btemperature\x18\x04 \x01(\x05\x12\x0f\n\x07voltage\x18\x05 \x01(\x05\x12\x0f\n\x07\x63urrent\x18\x06 \x01(\x05\"s\n\x07\x42\x61ttery\x12\x14\n\x0cpercent_full\x18\x01 \x01(\x05\x12$\n\x04\x63\x65ll\x18\x02 \x03(\x0b\x32\x16.shedBoat.Battery.Cell\x1a,\n\x04\x43\x65ll\x12\x13\n\x0b\x63\x65ll_number\x18\x01 \x02(\x05\x12\x0f\n\x07voltage\x18\x02 \x01(\x05\"\x9b\x01\n\x05\x44\x65\x62ug\x12\x1c\n\x14\x62\x65\x61ring_compensation\x18\x01 \x01(\x05\x12&\n\x1espeed_over_ground_compensation\x18\x02 \x01(\x05\x12%\n\x1dmotor_1_throttle_compensation\x18\x03 \x01(\x05\x12%\n\x1dmotor_2_throttle_compensation\x18\x04 \x01(\x05')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -57,6 +57,44 @@ _TELEMETRY_STATUS = _descriptor.EnumDescriptor(
   serialized_end=347,
 )
 _sym_db.RegisterEnumDescriptor(_TELEMETRY_STATUS)
+
+_LOCATION_QUALITY = _descriptor.EnumDescriptor(
+  name='Quality',
+  full_name='shedBoat.Location.Quality',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='IDEAL', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EXCELLENT', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='GOOD', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MODERATE', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FAIR', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SHIT', index=5, number=5,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=584,
+  serialized_end=663,
+)
+_sym_db.RegisterEnumDescriptor(_LOCATION_QUALITY)
 
 
 _TELEMETRY = _descriptor.Descriptor(
@@ -176,8 +214,8 @@ _LOCATION = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='fix_quality', full_name='shedBoat.Location.fix_quality', index=7,
-      number=8, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=0,
+      number=8, type=14, cpp_type=8, label=2,
+      has_default_value=True, default_value=5,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -186,6 +224,7 @@ _LOCATION = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
+    _LOCATION_QUALITY,
   ],
   options=None,
   is_extendable=False,
@@ -193,7 +232,7 @@ _LOCATION = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=350,
-  serialized_end=548,
+  serialized_end=663,
 )
 
 
@@ -257,8 +296,8 @@ _MOTOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=550,
-  serialized_end=665,
+  serialized_start=665,
+  serialized_end=780,
 )
 
 
@@ -294,8 +333,8 @@ _BATTERY_CELL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=738,
-  serialized_end=782,
+  serialized_start=853,
+  serialized_end=897,
 )
 
 _BATTERY = _descriptor.Descriptor(
@@ -330,8 +369,8 @@ _BATTERY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=667,
-  serialized_end=782,
+  serialized_start=782,
+  serialized_end=897,
 )
 
 
@@ -381,8 +420,8 @@ _DEBUG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=785,
-  serialized_end=940,
+  serialized_start=900,
+  serialized_end=1055,
 )
 
 _TELEMETRY.fields_by_name['status'].enum_type = _TELEMETRY_STATUS
@@ -391,6 +430,8 @@ _TELEMETRY.fields_by_name['motor'].message_type = _MOTOR
 _TELEMETRY.fields_by_name['battery'].message_type = _BATTERY
 _TELEMETRY.fields_by_name['debug'].message_type = _DEBUG
 _TELEMETRY_STATUS.containing_type = _TELEMETRY
+_LOCATION.fields_by_name['fix_quality'].enum_type = _LOCATION_QUALITY
+_LOCATION_QUALITY.containing_type = _LOCATION
 _BATTERY_CELL.containing_type = _BATTERY
 _BATTERY.fields_by_name['cell'].message_type = _BATTERY_CELL
 DESCRIPTOR.message_types_by_name['Telemetry'] = _TELEMETRY
